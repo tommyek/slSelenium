@@ -3,6 +3,8 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
@@ -11,18 +13,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class TestClassTest {
-    private static WebDriver driver;
+    //private static WebDriver driver;
     private Credentials sms_account;
+    private static GridSetup grid_driver;
+    private static RemoteWebDriver driver;
+    private static DesiredCapabilities remote_capabilities;
 
     @BeforeClass
     public static void startWebDriver(){
-        driver=new FirefoxDriver();
+        remote_capabilities=new DesiredCapabilities().firefox();
+        //remote_capabilities=new DesiredCapabilities().safari();
+        grid_driver=new GridSetup(driver,remote_capabilities);
+        grid_driver.setBrowserCapabilities();
+        grid_driver.setRemoteWebDriver();
     }
 
     @Before
     public void prepForTest(){
 
     sms_account=new Credentials();
+
 
     }
 
@@ -39,9 +49,9 @@ public class TestClassTest {
 
         final String TICKET_LOGIN=sms_account.ticket_url + "/user/sign_in";
 
-        driver.get(TICKET_LOGIN);
+        grid_driver.remote_driver.get(TICKET_LOGIN);
 
-        LoginPage login_page = new LoginPage(driver);
+        LoginPage login_page = new LoginPage(grid_driver.remote_driver);
         login_page.typePassword(sms_account.password);
         login_page.typeUserName(sms_account.telno);
         login_page.signIn();
@@ -52,12 +62,12 @@ public class TestClassTest {
 
     @Test
     public void forgottenPasswordWithErrors(){
-        driver.findElement(By.linkText("Har du glömt ditt lösenord?")).click();
+        grid_driver.remote_driver.findElement(By.linkText("Har du glömt ditt lösenord?")).click();
 
-        Assert.assertTrue(driver.findElement(By.id("phone_confirmation_phone_number")).isDisplayed());
+        Assert.assertTrue(grid_driver.remote_driver.findElement(By.id("phone_confirmation_phone_number")).isDisplayed());
 
 
-        ForgottenPassword forgotten_pwd = new ForgottenPassword(driver);
+        ForgottenPassword forgotten_pwd = new ForgottenPassword(grid_driver.remote_driver);
         forgotten_pwd.typePhoneNumber("0700012869");
         forgotten_pwd.getTemporaryPassword();
         assertThat(forgotten_pwd.temporaryPasswordUnsuccessfulMessageIsPresent(), is(true));
@@ -101,7 +111,7 @@ public class TestClassTest {
 
         @AfterClass
         public static void quitDriver(){
-            driver.quit();
+            grid_driver.remote_driver.quit();
         }
 
         /*String verificationErrorString = verificationErrors.toString();

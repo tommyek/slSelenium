@@ -2,14 +2,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 public class ForgottenPassword {
 
-    private final WebDriver driver;
+    private final RemoteWebDriver driver;
 
     By user_phoneno_text_field=By.id("phone_confirmation_phone_number");
     By get_temporary_pwd_button=By.name("commit");
 
-    public ForgottenPassword(WebDriver driver){
+    public ForgottenPassword(RemoteWebDriver driver){
         this.driver=driver;
 
     }

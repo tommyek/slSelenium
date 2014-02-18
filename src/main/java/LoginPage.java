@@ -1,18 +1,18 @@
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class LoginPage {
 
-    private final WebDriver driver;
+    private final RemoteWebDriver driver;
 
     By user_phoneno_text_field = By.id("user_phone_number");
     By user_password_text_field = By.id("user_password");
     By sign_in_button = By.name("commit");
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
