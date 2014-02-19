@@ -22,7 +22,7 @@ public class GridSetup {
     public GridSetup(RemoteWebDriver remote_driver, DesiredCapabilities capability){
 
         browser_name=System.getProperty(BROWSER_NAME,"firefox");
-        browser_version=System.getProperty(BROWSER_VERSION,"22.0");
+        browser_version=System.getProperty(BROWSER_VERSION,"27.0.1");
         browser_platform=Platform.getCurrent();
         remote_hub_url=System.getProperty(REMOTE_HUB_URL,"http://localhost:4444/wd/hub" );
 

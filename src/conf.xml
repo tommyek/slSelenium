@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+     <suite name="Parallel Tests" verbose="1" thread-count="2" parallel="tests">
+        <tests>
+            <test name="Firefox">
+                <parameters>
+                    <parameter name="platform" value="VISTA" />
+                    <parameter name="browser" value="Firefox" />
+                    <parameter name="version" value="27.0.1" />
+                    <parameter name="url" value="http://biljett.klarna.se"/>
+                </parameters>
+                <classes>
+                    <class name="TestWithTestNG" />
+                </classes>
+            </test>
+            <test name="Mac">
+                <parameters>
+                    <parameter name="platform" value="VISTA" />
+                    <parameter name="browser" value="Safari" />
+                    <parameter name="version" value="5.1.7" />
+                    <parameter name="url" value="http://biljett.klarna.se"/>
+                </parameters>
+                <classes>
+                    <class name="TestWithTestNG" />
+                </classes>
+            </test>
+        </tests>
+     </suite>

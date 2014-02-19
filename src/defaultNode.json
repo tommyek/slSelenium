@@ -2,15 +2,15 @@
 	[
 		{
 			"browserName": "firefox",
-			"version": "22.0",
-			"platform": "MAC",
+			"version": "27.0.1",
+			"platform": "VISTA",
 			"maxInstances": 1
 		},
 
 		{
 			"browserName": "safari",
-			"version": "7.0.1",
-			"platform": "MAC",
+			"version": "5.1.7",
+			"platform": "VISTA",
 			"maxInstances": 1
 		}
 	],
